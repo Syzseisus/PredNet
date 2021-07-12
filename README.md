@@ -8,11 +8,11 @@ Train in `train.ipynb`, and test in `test.ipynb`.
 
 # Training Data
 In folder named **'[KITTI](http://www.cvlibs.net/datasets/kitti/)'**, you can find the samples of datas used to testing this **Predet**.  
-Processed datas saved in `kitti_data` folder as  
+Save processed datas in `kitti_data` folder as  
 for training : `X_train.hkl`, `sources_train.hkl`  
 for validation : `X_val.hkl`, `sources_val.hkl`  
 for test : `X_test.hkl`, `sources_test.hkl`  
-(you can download them in [here](https://figshare.com/articles/dataset/KITTI_hkl_files/7985684) too)  
+(you can download them in [here](https://figshare.com/articles/dataset/KITTI_hkl_files/7985684))  
 Datas loaded with `kitti_data_load.py` when running `train.ipynb`.  
 
 # Details
