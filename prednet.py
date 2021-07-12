@@ -16,7 +16,6 @@ class PredNet(nn.Module):
                                    for l in range(self.n_layers)])
         self.output_mode = output_mode
         self.prediction_all = []
-#         self.error_all = []
         
         if output_mode == 'out_all':
             self.As = []
@@ -69,7 +68,8 @@ class PredNet(nn.Module):
         for t in range(time_steps):
             A = input[:,t]
             A = A.type(torch.cuda.FloatTensor)
-            # add As for out_all
+		
+            # As for out_all
             if self.output_mode == 'out_all':
                 self.As.append(A.data.cpu().detach().numpy().tolist())
             
@@ -85,7 +85,7 @@ class PredNet(nn.Module):
                 R_seq[l] = _r
                 C_seq[l] = _c
                 
-                # add Rs for out_all
+                # Rs for out_all
                 if self.output_mode == 'out_all':
                     self.Rs.append(_r.data.cpu().detach().numpy().tolist())
                 
@@ -101,7 +101,8 @@ class PredNet(nn.Module):
                     frame_prediction = A_hat
                 if self.output_mode == 'prediction_all':
                     self.prediction_all.append(A_hat)
-                # add Ahats for out_all
+		
+                # Ahats for out_all
                 if self.output_mode == 'out_all':
                     self.Ahats.append(A_hat.data.cpu().detach().numpy().tolist())
 
@@ -109,14 +110,16 @@ class PredNet(nn.Module):
                 neg = F.relu(A - A_hat)
                 E = torch.cat([pos, neg],1)
                 E_seq[l] = E
-                # add Es for out_all
+		
+                # Es for out_all
                 if self.output_mode == 'out_all':
                     self.Es.append(E.data.cpu().detach().numpy().tolist())
                 
                 if l < self.n_layers - 1:
                     update_A = getattr(self, 'update_A{}'.format(l))
                     A = update_A(E)
-                    # add As for out_all
+			
+                    # As for out_all
                     if self.output_mode == 'out_all':
                         self.As.append(A.data.cpu().detach().numpy().tolist())
                          
@@ -129,7 +132,6 @@ class PredNet(nn.Module):
                 total_error.append(mean_error)
             if self.output_mode == 'error_all':
                 for e in E_seq[0]:
-#                     self.error_all.append(e)
                     error_all.append(e)
     
     
@@ -144,10 +146,6 @@ class PredNet(nn.Module):
         elif self.output_mode == 'prediction_all':
             return self.prediction_all
         elif self.output_mode == 'error_all':
-#             print("shape: ", len(self.error_all), self.error_all[0].shape)
-#             return torch.cat(self.error_all,-3)
-#             print("shape: ", len(error_all), error_all[0].shape)
-#             return torch.cat(error_all,-3)
             errors = torch.cat(error_all,-3)
             targets = Variable(torch.zeros(errors.shape)).cuda()
             return self.loss_fn(errors, targets)
