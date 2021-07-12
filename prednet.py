@@ -47,7 +47,7 @@ class PredNet(nn.Module):
 
     def forward(self, input):
         
-        error_all = []
+        if output_mode == 'error_all': error_all = []
 
         E_seq = [None] * self.n_layers
         R_seq = [None] * self.n_layers
@@ -140,15 +140,15 @@ class PredNet(nn.Module):
             
 
         if self.output_mode == 'error':
-            return torch.stack(total_error, 2) # batch x n_layers x nt
+            errors = torch.stack(total_error, 2) # batch x n_layers x nt
+	    targets = Variable(torch.zeros(errors.shape)).cda()
+	    return self.loss_fn(errors, targets)
         elif self.output_mode == 'prediction':
             return frame_prediction
         elif self.output_mode == 'prediction_all':
             return self.prediction_all
         elif self.output_mode == 'error_all':
-            errors = torch.cat(error_all,-3)
-            targets = Variable(torch.zeros(errors.shape)).cuda()
-            return self.loss_fn(errors, targets)
+	    return error_all
         elif self.output_mode == 'out_all':
             return self.As, self.Ahats, self.Es, self.Rs
 
