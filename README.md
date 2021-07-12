@@ -13,7 +13,7 @@ for training : `X_train.hkl`, `sources_train.hkl`
 for validation : `X_val.hkl`, `sources_val.hkl`  
 for test : `X_test.hkl`, `sources_test.hkl`  
 (you can download them in [here](https://figshare.com/articles/dataset/KITTI_hkl_files/7985684) too)  
-Datas loaded with `kitti_data.py` when running `train.ipynb`.  
+Datas loaded with `kitti_data_load.py` when running `train.ipynb`.  
 
 # Details
 
