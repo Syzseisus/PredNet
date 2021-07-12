@@ -1,11 +1,9 @@
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
-from convlstmcell import ConvLSTMCell
 from torch.autograd import Variable
 
-
-from debug import info
+from convlstmcell import ConvLSTMCell
 
 
 class PredNet(nn.Module):
