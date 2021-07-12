@@ -7,8 +7,8 @@ from torch.autograd import Variable
 class ConvLSTMCell(nn.Module):
     def __init__(self, in_channels, out_channels):
         super(ConvLSTMCell, self).__init__()
-        self.in_channels = in_channels # error = (6,96,192,384) + up_state = (48,96,192,0)
-        self.out_channels = out_channels # hidden = 3, 48, 96, 192
+        self.in_channels = in_channels
+        self.out_channels = out_channels
         self.Gates = nn.Conv2d(in_channels + out_channels, 4*out_channels, 3, padding=1)
     
     def forward(self, x, prev_state): 
