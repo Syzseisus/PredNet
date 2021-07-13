@@ -27,3 +27,6 @@ The PredNet is a deep recurrent convolutional neural network that is inspired by
 1. https://coxlab.github.io/prednet/
 2. https://github.com/leido/pytorch-prednet
 3. https://github.com/jonizhong/afa_prednet
+
+# Hits
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FSyzseisus%2FPredNet&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
