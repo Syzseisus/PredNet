@@ -1,8 +1,9 @@
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
-from convlstmcell_lotterly2 import ConvLSTMCell
 from torch.autograd import Variable
+
+from convlstmcell import ConvLSTMCell
 
 
 
